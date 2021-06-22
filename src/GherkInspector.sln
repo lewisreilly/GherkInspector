@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31321.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GherkInspector.Parser", "GherkInspector.Parser\GherkInspector.Parser.csproj", "{516541E1-6E27-410D-92CF-EA40AD150A50}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GherkInspector.Parser.UnitTests", "GherkInspector.Parser.Tests\GherkInspector.Parser.UnitTests.csproj", "{2A6E3193-DC2D-4ED2-8F74-8EE47FD961B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GherkInspector.Parser.IntegrationTests", "GherkInspector.Parser.IntegrationTests\GherkInspector.Parser.IntegrationTests.csproj", "{BD3F8860-5231-434D-A1C2-6393EF0C78A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GherkInspector.CLI", "GherkInspector.CLI\GherkInspector.CLI.csproj", "{FDA67AE5-88C2-4AB1-8CC0-704050126AD4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{516541E1-6E27-410D-92CF-EA40AD150A50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{516541E1-6E27-410D-92CF-EA40AD150A50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{516541E1-6E27-410D-92CF-EA40AD150A50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{516541E1-6E27-410D-92CF-EA40AD150A50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A6E3193-DC2D-4ED2-8F74-8EE47FD961B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A6E3193-DC2D-4ED2-8F74-8EE47FD961B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A6E3193-DC2D-4ED2-8F74-8EE47FD961B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A6E3193-DC2D-4ED2-8F74-8EE47FD961B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD3F8860-5231-434D-A1C2-6393EF0C78A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD3F8860-5231-434D-A1C2-6393EF0C78A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD3F8860-5231-434D-A1C2-6393EF0C78A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD3F8860-5231-434D-A1C2-6393EF0C78A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDA67AE5-88C2-4AB1-8CC0-704050126AD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDA67AE5-88C2-4AB1-8CC0-704050126AD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDA67AE5-88C2-4AB1-8CC0-704050126AD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDA67AE5-88C2-4AB1-8CC0-704050126AD4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {73ADC7E6-066E-4528-B4C0-CDEF9D133C10}
+	EndGlobalSection
+EndGlobal
