@@ -76,6 +76,9 @@ Scenario: Test One
 
             Assert.That(scenario.Tags.Count, Is.EqualTo(0));
             Assert.That(scenario.Steps.Count, Is.EqualTo(0));
+
+            Assert.That(scenario.Location.Line, Is.EqualTo(4));
+            Assert.That(scenario.Location.Column, Is.EqualTo(1));
         }
 
         [Test]
@@ -122,14 +125,23 @@ Scenario: Test One
             var scenario = result.Scenarios.First();
             Assert.That(scenario.Steps.Count, Is.EqualTo(3));
 
-            Assert.That(scenario.Steps[0].Keyword, Is.EqualTo("Given "));
-            Assert.That(scenario.Steps[0].Text, Is.EqualTo("a"));
+            var firstStep = scenario.Steps[0];
+            Assert.That(firstStep.Keyword, Is.EqualTo("Given "));
+            Assert.That(firstStep.Text, Is.EqualTo("a"));
+            Assert.That(firstStep.Location.Line, Is.EqualTo(5));
+            Assert.That(firstStep.Location.Column, Is.EqualTo(5));
 
-            Assert.That(scenario.Steps[1].Keyword, Is.EqualTo("When "));
-            Assert.That(scenario.Steps[1].Text, Is.EqualTo("b"));
+            var secondStep = scenario.Steps[1];
+            Assert.That(secondStep.Keyword, Is.EqualTo("When "));
+            Assert.That(secondStep.Text, Is.EqualTo("b"));
+            Assert.That(secondStep.Location.Line, Is.EqualTo(6));
+            Assert.That(secondStep.Location.Column, Is.EqualTo(5));
 
-            Assert.That(scenario.Steps[2].Keyword, Is.EqualTo("Then "));
-            Assert.That(scenario.Steps[2].Text, Is.EqualTo("c"));
+            var thirdStep = scenario.Steps[2];
+            Assert.That(thirdStep.Keyword, Is.EqualTo("Then "));
+            Assert.That(thirdStep.Text, Is.EqualTo("c"));
+            Assert.That(thirdStep.Location.Line, Is.EqualTo(7));
+            Assert.That(thirdStep.Location.Column, Is.EqualTo(5));
         }
 
         [Test]
