@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GherkInspector.Parser;
+using System;
 
 namespace GherkInspector.CLI
 {
@@ -18,6 +19,35 @@ namespace GherkInspector.CLI
                                              |_|                            
 ";
             Console.WriteLine(big);
+            Console.WriteLine();
+
+            var rootPath = args[0];
+            var featureFileReader = new FeatureFileReader();
+            var overview = featureFileReader.Read(rootPath);
+
+            Console.WriteLine($"Total feature files: {overview.TotalFeatureCount}");
+            Console.WriteLine($"Total scenarios:     {overview.TotalScenarioCount}");
+            Console.WriteLine();
+
+            string currentPath = string.Empty;
+            foreach(var feature in overview.Features)
+            {
+                if(currentPath != feature.Path)
+                {
+                    currentPath = feature.Path;
+                    Console.WriteLine(currentPath.Replace(rootPath, string.Empty));
+                    Console.WriteLine();
+                }
+                
+                Console.WriteLine($"    {feature.Name}.feature");
+                
+                foreach(var scenario in feature.Scenarios)
+                {
+                    Console.WriteLine($"        Scenario: {scenario.Name}");
+                }
+
+                Console.WriteLine();
+            }
 
             Console.ReadKey();
         }
