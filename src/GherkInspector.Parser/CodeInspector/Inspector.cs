@@ -1,0 +1,56 @@
+﻿using GherkInspector.Parser.Entity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace GherkInspector.Parser.CodeInspector
+{
+    public class Inspector
+    {
+        public bool HasWarnings => Warnings.Count > 0;
+
+        public List<Warning> Warnings { get; private set; }
+
+        public Inspector()
+        {
+            Warnings = new List<Warning>();
+        }
+
+        public void InspectScenario(XScenario scenario)
+        {
+            if (scenario.Steps.Count(step => step.Keyword == "Given ") > 1)
+            {
+                var badStep = scenario.Steps.Last();
+                Warnings.Add(
+                    new Warning(
+                        "1",
+                        badStep.Location,
+                        "Keyword 'Given' should only appear once per scenario")
+                    );
+            }
+
+            if (scenario.Steps.Count(step => step.Keyword == "When ") > 1)
+            {
+                var badStep = scenario.Steps.Last();
+                Warnings.Add(
+                    new Warning(
+                        "2",
+                        badStep.Location,
+                        "Keyword 'When' should only appear once per scenario")
+                    );
+            }
+
+            if (scenario.Steps.Count(step => step.Keyword == "Then ") > 1)
+            {
+                var badStep = scenario.Steps.Last();
+                Warnings.Add(
+                    new Warning(
+                        "3",
+                        badStep.Location,
+                        "Keyword 'Then' should only appear once per scenario")
+                    );
+            }
+        }
+    }
+}

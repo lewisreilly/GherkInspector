@@ -1,4 +1,5 @@
 ﻿using GherkInspector.Parser;
+using GherkInspector.Parser.CodeInspector;
 using System;
 
 namespace GherkInspector.CLI
@@ -44,6 +45,17 @@ namespace GherkInspector.CLI
                 foreach(var scenario in feature.Scenarios)
                 {
                     Console.WriteLine($"        Scenario: {scenario.Name}");
+
+                    var inspector = new Inspector();
+                    inspector.InspectScenario(scenario);
+
+                    if(inspector.HasWarnings)
+                    {
+                        foreach(var warning in inspector.Warnings)
+                        {
+                            Console.WriteLine($"            > {warning.Error}");
+                        }
+                    }
                 }
 
                 Console.WriteLine();
