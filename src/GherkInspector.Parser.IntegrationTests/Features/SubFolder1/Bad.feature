@@ -8,13 +8,7 @@ Scenario: Multiple step keywords
     Given another given step
     Then the last step
 
-    Scenario: Scenario indented by 4 spaces
-    Given a step
-    And another step
-    When action
-    Then assertion
-
-	Scenario: Scenario indented a tab
+ Scenario: Scenario indented
     Given a step
     And another step
     When action
