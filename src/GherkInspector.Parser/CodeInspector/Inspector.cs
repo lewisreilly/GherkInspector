@@ -51,6 +51,19 @@ namespace GherkInspector.Parser.CodeInspector
                         "Keyword 'Then' should only appear once per scenario")
                     );
             }
+
+            foreach(var step in scenario.Steps)
+            {
+                if( step.Location.Column != 5)
+                {
+                    Warnings.Add(
+                    new Warning(
+                        "4",
+                        step.Location,
+                        "Steps should be indented with 4 spaces")
+                    );
+                }
+            }
         }
     }
 }

@@ -8,8 +8,16 @@ namespace GherkInspector.Parser.UnitTests.CodeInspector
     [TestFixture]
     public class InspectorTests
     {
-        private readonly XLocation Line1 = new XLocation(1, 0);
-        private readonly XLocation Line2 = new XLocation(2, 0);
+        private const string Tab = "	";
+        private const string ThreeSpaces = "   ";
+        private const string FiveSpaces = "     ";
+
+        private readonly GherkinParser _gherkinParser;
+
+        public InspectorTests()
+        {
+            _gherkinParser = new GherkinParser();
+        }
 
         [Test]
         public void Inspect_MultipleGivenSteps_Warning()
@@ -17,9 +25,15 @@ namespace GherkInspector.Parser.UnitTests.CodeInspector
             // Arrange
             var inspector = new Inspector();
 
-            var scenario = new XScenario();
-            scenario.Steps.Add(new XStep("Given ", "a step", Line1));
-            scenario.Steps.Add(new XStep("Given ", "another step", Line2));
+            var result = _gherkinParser.ParseFeatureText(@"
+Feature: Example
+
+Scenario: Example
+    Given a step
+    Given another step
+");
+            
+            var scenario = result.Scenarios.First();
 
             // Act
             inspector.InspectScenario(scenario);
@@ -27,9 +41,9 @@ namespace GherkInspector.Parser.UnitTests.CodeInspector
             // Assert
             Assert.That(inspector.HasWarnings, Is.True);
             Assert.That(inspector.Warnings.Count, Is.EqualTo(1));
-            Assert.That(inspector.Warnings.First().Error, Does.Contain("1:"));
+            Assert.That(inspector.Warnings.First().Error, Does.StartWith("1:"));
             Assert.That(inspector.Warnings.First().Error, Does.Contain("Keyword 'Given' should only appear once per scenario"));
-            Assert.That(inspector.Warnings.First().Error, Does.Contain("Line 2"));
+            Assert.That(inspector.Warnings.First().Error, Does.Contain("Line 6"));
         }
 
         [Test]
@@ -38,9 +52,15 @@ namespace GherkInspector.Parser.UnitTests.CodeInspector
             // Arrange
             var inspector = new Inspector();
 
-            var scenario = new XScenario();
-            scenario.Steps.Add(new XStep("When ", "a step", Line1));
-            scenario.Steps.Add(new XStep("When ", "another step", Line2));
+            var result = _gherkinParser.ParseFeatureText(@"
+Feature: Example
+
+Scenario: Example
+    When a step
+    When another step
+");
+
+            var scenario = result.Scenarios.First();
 
             // Act
             inspector.InspectScenario(scenario);
@@ -48,9 +68,9 @@ namespace GherkInspector.Parser.UnitTests.CodeInspector
             // Assert
             Assert.That(inspector.HasWarnings, Is.True);
             Assert.That(inspector.Warnings.Count, Is.EqualTo(1));
-            Assert.That(inspector.Warnings.First().Error, Does.Contain("2:"));
+            Assert.That(inspector.Warnings.First().Error, Does.StartWith("2:"));
             Assert.That(inspector.Warnings.First().Error, Does.Contain("Keyword 'When' should only appear once per scenario"));
-            Assert.That(inspector.Warnings.First().Error, Does.Contain("Line 2"));
+            Assert.That(inspector.Warnings.First().Error, Does.Contain("Line 6"));
         }
 
         [Test]
@@ -59,9 +79,15 @@ namespace GherkInspector.Parser.UnitTests.CodeInspector
             // Arrange
             var inspector = new Inspector();
 
-            var scenario = new XScenario();
-            scenario.Steps.Add(new XStep("Then ", "a step", Line1));
-            scenario.Steps.Add(new XStep("Then ", "another step", Line2));
+            var result = _gherkinParser.ParseFeatureText(@"
+Feature: Example
+
+Scenario: Example
+    Then a step
+    Then another step
+");
+
+            var scenario = result.Scenarios.First();
 
             // Act
             inspector.InspectScenario(scenario);
@@ -69,9 +95,9 @@ namespace GherkInspector.Parser.UnitTests.CodeInspector
             // Assert
             Assert.That(inspector.HasWarnings, Is.True);
             Assert.That(inspector.Warnings.Count, Is.EqualTo(1));
-            Assert.That(inspector.Warnings.First().Error, Does.Contain("3:"));
+            Assert.That(inspector.Warnings.First().Error, Does.StartWith("3:"));
             Assert.That(inspector.Warnings.First().Error, Does.Contain("Keyword 'Then' should only appear once per scenario"));
-            Assert.That(inspector.Warnings.First().Error, Does.Contain("Line 2"));
+            Assert.That(inspector.Warnings.First().Error, Does.Contain("Line 6"));
         }
 
         [Test]
@@ -80,13 +106,19 @@ namespace GherkInspector.Parser.UnitTests.CodeInspector
             // Arrange
             var inspector = new Inspector();
 
-            var scenario = new XScenario();
-            scenario.Steps.Add(new XStep("Given ", "a step", Line1));
-            scenario.Steps.Add(new XStep("Given ", "another step", Line2));
-            scenario.Steps.Add(new XStep("When ", "a step", new XLocation(3, 0)));
-            scenario.Steps.Add(new XStep("When ", "another step", new XLocation(4, 0)));
-            scenario.Steps.Add(new XStep("Then ", "a step", new XLocation(5, 0)));
-            scenario.Steps.Add(new XStep("Then ", "another step", new XLocation(6, 0)));
+            var result = _gherkinParser.ParseFeatureText(@"
+Feature: Example
+
+Scenario: Example
+    Given a step
+    Given another step
+    When a step
+    When another step
+    Then a step
+    Then another step
+");
+
+            var scenario = result.Scenarios.First();
 
             // Act
             inspector.InspectScenario(scenario);
@@ -94,9 +126,34 @@ namespace GherkInspector.Parser.UnitTests.CodeInspector
             // Assert
             Assert.That(inspector.HasWarnings, Is.True);
             Assert.That(inspector.Warnings.Count, Is.EqualTo(3));
-            Assert.That(inspector.Warnings[0].Error, Does.Contain("1:"));
-            Assert.That(inspector.Warnings[1].Error, Does.Contain("2:"));
-            Assert.That(inspector.Warnings[2].Error, Does.Contain("3:"));
+            Assert.That(inspector.Warnings[0].Error, Does.StartWith("1:"));
+            Assert.That(inspector.Warnings[1].Error, Does.StartWith("2:"));
+            Assert.That(inspector.Warnings[2].Error, Does.StartWith("3:"));
+        }
+
+        [TestCase(ThreeSpaces)]
+        [TestCase(FiveSpaces)]
+        [TestCase(Tab)]
+        public void StepIndentation_NotFourSpaces_Warning(string indentation)
+        {
+            // Arrange
+            var inspector = new Inspector();
+
+            var result = _gherkinParser.ParseFeatureText($@"
+Feature: Example
+
+Scenario: Example
+{indentation}Given a step
+");
+            var scenario = result.Scenarios.First();
+
+            // Act
+            inspector.InspectScenario(scenario);
+
+            // Assert
+            Assert.That(inspector.Warnings.Count, Is.EqualTo(1));
+            Assert.That(inspector.Warnings.First().Error, Does.StartWith("4:"));
+            Assert.That(inspector.Warnings.First().Error, Does.Contain("Steps should be indented with 4 spaces"));
         }
     }
 }
