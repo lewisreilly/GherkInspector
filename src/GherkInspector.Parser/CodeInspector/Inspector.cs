@@ -1,8 +1,6 @@
 ﻿using GherkInspector.Parser.Entity;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace GherkInspector.Parser.CodeInspector
 {
@@ -17,8 +15,18 @@ namespace GherkInspector.Parser.CodeInspector
             Warnings = new List<Warning>();
         }
 
-        public void InspectScenario(XScenario scenario)
+        public void InspectScenario(GherkInspectorScenario scenario)
         {
+            if(scenario.Location.Column > 1)
+            {
+                Warnings.Add(
+                    new Warning(
+                        "5",
+                        scenario.Location,
+                        "Keyword 'Scenario' should not be indented")
+                    );
+            }
+            
             if (scenario.Steps.Count(step => step.Keyword == "Given ") > 1)
             {
                 var badStep = scenario.Steps.Last();

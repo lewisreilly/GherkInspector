@@ -1,14 +1,14 @@
 ﻿namespace GherkInspector.Parser.Entity
 {
-    public class XStep
+    public class GherkInspectorStep
     {
         public string Keyword { get; private set; }
 
         public string Text { get; private set; }
 
-        public XLocation Location { get; private set; }
+        public GherkInspectorLocation Location { get; private set; }
 
-        public XStep(string keyword, string text, XLocation location)
+        public GherkInspectorStep(string keyword, string text, GherkInspectorLocation location)
         {
             Keyword = keyword;
             Text = text;

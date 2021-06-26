@@ -1,5 +1,4 @@
 ﻿using GherkInspector.Parser.CodeInspector;
-using GherkInspector.Parser.Entity;
 using NUnit.Framework;
 using System.Linq;
 
@@ -32,11 +31,9 @@ Scenario: Example
     Given a step
     Given another step
 ");
-            
-            var scenario = result.Scenarios.First();
 
             // Act
-            inspector.InspectScenario(scenario);
+            inspector.InspectScenario(result.Scenarios.First());
 
             // Assert
             Assert.That(inspector.HasWarnings, Is.True);
@@ -60,10 +57,8 @@ Scenario: Example
     When another step
 ");
 
-            var scenario = result.Scenarios.First();
-
             // Act
-            inspector.InspectScenario(scenario);
+            inspector.InspectScenario(result.Scenarios.First());
 
             // Assert
             Assert.That(inspector.HasWarnings, Is.True);
@@ -87,10 +82,8 @@ Scenario: Example
     Then another step
 ");
 
-            var scenario = result.Scenarios.First();
-
             // Act
-            inspector.InspectScenario(scenario);
+            inspector.InspectScenario(result.Scenarios.First());
 
             // Assert
             Assert.That(inspector.HasWarnings, Is.True);
@@ -118,10 +111,8 @@ Scenario: Example
     Then another step
 ");
 
-            var scenario = result.Scenarios.First();
-
             // Act
-            inspector.InspectScenario(scenario);
+            inspector.InspectScenario(result.Scenarios.First());
 
             // Assert
             Assert.That(inspector.HasWarnings, Is.True);
@@ -129,6 +120,28 @@ Scenario: Example
             Assert.That(inspector.Warnings[0].Error, Does.StartWith("1:"));
             Assert.That(inspector.Warnings[1].Error, Does.StartWith("2:"));
             Assert.That(inspector.Warnings[2].Error, Does.StartWith("3:"));
+        }
+
+        [Test]
+        public void Scenario_AnyIndentation_Warning()
+        {
+            // Arrange
+            var inspector = new Inspector();
+
+            var result = _gherkinParser.ParseFeatureText(@"
+Feature: Example
+
+ Scenario: Example
+");
+
+            // Act
+            inspector.InspectScenario(result.Scenarios.First());
+
+            // Assert
+            Assert.That(inspector.Warnings.Count, Is.EqualTo(1));
+            Assert.That(inspector.Warnings.First().Error, Does.StartWith("5:"));
+            Assert.That(inspector.Warnings.First().Error, Does.Contain("Keyword 'Scenario' should not be indented"));
+            Assert.That(inspector.Warnings.First().Error, Does.Contain("Column 2"));
         }
 
         [TestCase(ThreeSpaces)]
@@ -145,10 +158,9 @@ Feature: Example
 Scenario: Example
 {indentation}Given a step
 ");
-            var scenario = result.Scenarios.First();
 
             // Act
-            inspector.InspectScenario(scenario);
+            inspector.InspectScenario(result.Scenarios.First());
 
             // Assert
             Assert.That(inspector.Warnings.Count, Is.EqualTo(1));

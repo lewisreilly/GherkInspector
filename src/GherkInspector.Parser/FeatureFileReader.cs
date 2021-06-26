@@ -15,11 +15,11 @@ namespace GherkInspector.Parser
             _gherkinParser = new GherkinParser();
         }
 
-        public Overview Read(string path)
+        public ParserResults Read(string path)
         {
             var files = Directory.GetFiles(path, "*.feature", SearchOption.AllDirectories);
 
-            var featureFiles = new List<XFeature>();
+            var featureFiles = new List<GherkInspectorFeature>();
             foreach (string filename in files)
             {
                 var feature = ParseFeatureFile(filename);
@@ -30,10 +30,10 @@ namespace GherkInspector.Parser
                 featureFiles.Add(feature);
             }
 
-            return new Overview(featureFiles);
+            return new ParserResults(featureFiles);
         }
 
-        private XFeature ParseFeatureFile(string filePath)
+        private GherkInspectorFeature ParseFeatureFile(string filePath)
         {
             string fileContents;
             using (StreamReader streamReader = new StreamReader(filePath))

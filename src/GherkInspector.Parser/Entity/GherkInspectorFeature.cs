@@ -2,19 +2,19 @@
 
 namespace GherkInspector.Parser.Entity
 {
-    public class XFeature
+    public class GherkInspectorFeature
     {
         public string Name { get; set; }
         public List<string> Tags { get; set; }
         public string Description { get; set; }
-        public List<XScenario> Scenarios { get; set; }
+        public List<GherkInspectorScenario> Scenarios { get; set; }
         public string Path { get; set; }
 
-        public XFeature()
+        public GherkInspectorFeature()
         {
             Tags = new List<string>();
             Description = string.Empty;
-            Scenarios = new List<XScenario>();
+            Scenarios = new List<GherkInspectorScenario>();
         }
     }
 }

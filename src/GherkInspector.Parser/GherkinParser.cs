@@ -1,12 +1,13 @@
 ﻿using Gherkin.Ast;
 using GherkInspector.Parser.Entity;
 using System.IO;
+using System.Linq;
 
 namespace GherkInspector.Parser
 {
     public class GherkinParser
     {
-        public XFeature ParseFeatureText(string text)
+        public GherkInspectorFeature ParseFeatureText(string text)
         {
             GherkinDocument gherkinDocument;
             var parser = new Gherkin.Parser();
@@ -15,7 +16,7 @@ namespace GherkInspector.Parser
                 gherkinDocument = parser.Parse(reader);
             }
 
-            var feature = new XFeature();
+            var feature = new GherkInspectorFeature();
             feature.Name = gherkinDocument.Feature.Name;
             
             ParseDescription(gherkinDocument, feature);
@@ -27,12 +28,12 @@ namespace GherkInspector.Parser
 
             foreach (var featureChild in gherkinDocument.Feature.Children)
             {
-                var xScenario = new XScenario();
+                var xScenario = new GherkInspectorScenario();
 
                 if (featureChild is Scenario scenario)
                 {
-                    var xLocation = new XLocation(scenario.Location.Line, scenario.Location.Column);
-                    xScenario = new XScenario(scenario.Name, xLocation);
+                    var xLocation = new GherkInspectorLocation(scenario.Location.Line, scenario.Location.Column);
+                    xScenario = new GherkInspectorScenario(scenario.Name, xLocation);
 
                     foreach (var tag in feature.Tags)
                     {
@@ -50,10 +51,10 @@ namespace GherkInspector.Parser
                     foreach (var step in stepsContainer.Steps)
                     {
                         xScenario.Steps.Add(
-                            new XStep(
+                            new GherkInspectorStep(
                                 step.Keyword,
                                 step.Text,
-                                new XLocation(
+                                new GherkInspectorLocation(
                                     step.Location.Line,
                                     step.Location.Column)
                                 )
@@ -67,7 +68,7 @@ namespace GherkInspector.Parser
             return feature;
         }
 
-        private void ParseDescription(GherkinDocument gherkinDocument, XFeature feature)
+        private void ParseDescription(GherkinDocument gherkinDocument, GherkInspectorFeature feature)
         {
             if (gherkinDocument.Feature.Description != null)
             {

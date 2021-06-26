@@ -5,17 +5,17 @@ using System.Text;
 
 namespace GherkInspector.Parser.Entity
 {
-    public class Overview
+    public class ParserResults
     {
         public int TotalFeatureCount => Features.Count;
 
         public int TotalScenarioCount => Features.Sum(f => f.Scenarios.Count);
 
-        public Overview(List<XFeature> features)
+        public ParserResults(List<GherkInspectorFeature> features)
         {
             Features = features;
         }
 
-        public List<XFeature> Features { get; private set; }
+        public List<GherkInspectorFeature> Features { get; private set; }
     }
 }

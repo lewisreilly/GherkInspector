@@ -1,8 +1,8 @@
 ﻿namespace GherkInspector.Parser.Entity
 {
-    public class XLocation
+    public class GherkInspectorLocation
     {
-        public XLocation(int line, int column)
+        public GherkInspectorLocation(int line, int column)
         {
             Line = line;
             Column = column;
