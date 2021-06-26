@@ -6,8 +6,18 @@ namespace GherkInspector.CLI
 {
     class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// GherkInspector
+        /// </summary>
+        /// <param name="path">Path of the root directory where your feature files are located.</param>
+        static void Main(string path = null)
         {
+            if (path == null)
+            {
+                Console.WriteLine("Please provide the path of the root directory where your feature files are located.");
+                return;
+            }
+
             // http://www.patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20
             var big = @"
    _____ _               _    _____                           _             
@@ -22,9 +32,8 @@ namespace GherkInspector.CLI
             Console.WriteLine(big);
             Console.WriteLine();
 
-            var rootPath = args[0];
             var featureFileReader = new FeatureFileReader();
-            var overview = featureFileReader.Read(rootPath);
+            var overview = featureFileReader.Read(path);
 
             Console.WriteLine($"Total feature files: {overview.TotalFeatureCount}");
             Console.WriteLine($"Total scenarios:     {overview.TotalScenarioCount}");
@@ -36,7 +45,7 @@ namespace GherkInspector.CLI
                 if(currentPath != feature.Path)
                 {
                     currentPath = feature.Path;
-                    Console.WriteLine(currentPath.Replace(rootPath, string.Empty));
+                    Console.WriteLine(currentPath.Replace(path, string.Empty));
                     Console.WriteLine();
                 }
                 
@@ -53,15 +62,13 @@ namespace GherkInspector.CLI
                     {
                         foreach(var warning in inspector.Warnings)
                         {
-                            Console.WriteLine($"            > {warning.Error}");
+                            Console.WriteLine($"            > GIN100{warning.Error}");
                         }
                     }
                 }
 
                 Console.WriteLine();
             }
-
-            Console.ReadKey();
         }
     }
 }
