@@ -16,8 +16,8 @@ namespace GherkInspector.Parser.IntegrationTests
 
             var results = featureFileReader.Read($"{rootDirectory}/Features");
 
-            Assert.That(results.TotalFeatureCount, Is.EqualTo(4));
-            Assert.That(results.TotalScenarioCount, Is.EqualTo(9));
+            Assert.That(results.TotalFeatureCount, Is.EqualTo(3));
+            Assert.That(results.TotalScenarioCount, Is.EqualTo(10));
         }
     }
 }
