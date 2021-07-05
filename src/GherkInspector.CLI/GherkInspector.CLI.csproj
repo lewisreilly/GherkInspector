@@ -13,4 +13,10 @@
     <ProjectReference Include="..\GherkInspector.Parser\GherkInspector.Parser.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Run.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
