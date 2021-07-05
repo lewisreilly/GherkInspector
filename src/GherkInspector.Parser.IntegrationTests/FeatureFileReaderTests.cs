@@ -9,6 +9,7 @@ namespace GherkInspector.Parser.IntegrationTests
     public class FeatureFileReaderTests
     {
         [Test]
+        [Explicit]
         public void Read_DirectoryContainingFeatureFiles_FindsThem()
         {
             var featureFileReader = new FeatureFileReader();

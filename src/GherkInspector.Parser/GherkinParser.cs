@@ -1,5 +1,6 @@
 ﻿using Gherkin.Ast;
 using GherkInspector.Parser.Entity;
+using System;
 using System.IO;
 using System.Linq;
 
@@ -13,12 +14,19 @@ namespace GherkInspector.Parser
             var parser = new Gherkin.Parser();
             using (var reader = new StringReader(text))
             {
-                gherkinDocument = parser.Parse(reader);
+                try
+                {
+                    gherkinDocument = parser.Parse(reader);
+                }
+                catch (Exception)
+                {
+                    return new GherkInspectorFeature();
+                }
             }
 
             var feature = new GherkInspectorFeature();
             feature.Name = gherkinDocument.Feature.Name;
-            
+
             ParseDescription(gherkinDocument, feature);
 
             foreach (var tag in gherkinDocument.Feature.Tags)

@@ -1,4 +1,4 @@
-﻿Feature: Bad
+﻿Feature: Wrong Keyword Usage
 
 A short summary of the feature
 

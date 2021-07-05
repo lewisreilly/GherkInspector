@@ -18,7 +18,7 @@
     <None Update="Features\Feature1.feature">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Features\SubFolder1\Bad.feature">
+    <None Update="Features\SubFolder1\WrongKeywordUsage.feature">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Features\SubFolder1\Feature2.feature">
