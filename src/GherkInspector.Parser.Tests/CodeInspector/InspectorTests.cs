@@ -1,9 +1,9 @@
-﻿using GherkInspector.Parser.CodeInspector;
-using NUnit.Framework;
-using System.Linq;
-
-namespace GherkInspector.Parser.UnitTests.CodeInspector
+﻿namespace GherkInspector.Parser.UnitTests.CodeInspector
 {
+    using System.Linq;
+    using GherkInspector.Parser.CodeInspector;
+    using NUnit.Framework;
+
     [TestFixture]
     public class InspectorTests
     {

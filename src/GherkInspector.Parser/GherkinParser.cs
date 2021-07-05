@@ -1,11 +1,10 @@
-﻿using Gherkin.Ast;
-using GherkInspector.Parser.Entity;
-using System;
-using System.IO;
-using System.Linq;
-
-namespace GherkInspector.Parser
+﻿namespace GherkInspector.Parser
 {
+    using System;
+    using System.IO;
+    using Gherkin.Ast;
+    using GherkInspector.Parser.Entity;
+
     public class GherkinParser
     {
         public GherkInspectorFeature ParseFeatureText(string text)
@@ -64,9 +63,7 @@ namespace GherkInspector.Parser
                                 step.Text,
                                 new GherkInspectorLocation(
                                     step.Location.Line,
-                                    step.Location.Column)
-                                )
-                            );
+                                    step.Location.Column)));
                     }
                 }
 

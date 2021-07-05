@@ -1,11 +1,9 @@
-﻿using GherkInspector.Parser.Entity;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-
-namespace GherkInspector.Parser
+﻿namespace GherkInspector.Parser
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using GherkInspector.Parser.Entity;
+
     public class FeatureFileReader
     {
         private readonly GherkinParser _gherkinParser;

@@ -9,6 +9,7 @@
         }
 
         public int Line { get; }
+
         public int Column { get; }
     }
 }

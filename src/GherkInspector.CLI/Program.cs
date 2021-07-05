@@ -1,16 +1,16 @@
-﻿using GherkInspector.Parser;
-using GherkInspector.Parser.CodeInspector;
-using System;
-
-namespace GherkInspector.CLI
+﻿namespace GherkInspector.CLI
 {
-    class Program
+    using System;
+    using GherkInspector.Parser;
+    using GherkInspector.Parser.CodeInspector;
+
+    internal class Program
     {
         /// <summary>
-        /// GherkInspector
+        /// GherkInspector.
         /// </summary>
         /// <param name="path">Path of the root directory where your feature files are located.</param>
-        static void Main(string path = null)
+        private static void Main(string path = null)
         {
             if (path == null)
             {
@@ -40,27 +40,27 @@ namespace GherkInspector.CLI
             Console.WriteLine();
 
             string currentPath = string.Empty;
-            foreach(var feature in overview.Features)
+            foreach (var feature in overview.Features)
             {
-                if(currentPath != feature.Path)
+                if (currentPath != feature.Path)
                 {
                     currentPath = feature.Path;
                     Console.WriteLine(currentPath.Replace(path, string.Empty));
                     Console.WriteLine();
                 }
-                
+
                 Console.WriteLine($"    {feature.Name}.feature");
-                
-                foreach(var scenario in feature.Scenarios)
+
+                foreach (var scenario in feature.Scenarios)
                 {
                     Console.WriteLine($"        Scenario: {scenario.Name}");
 
                     var inspector = new Inspector();
                     inspector.InspectScenario(scenario);
 
-                    if(inspector.HasWarnings)
+                    if (inspector.HasWarnings)
                     {
-                        foreach(var warning in inspector.Warnings)
+                        foreach (var warning in inspector.Warnings)
                         {
                             Console.WriteLine($"            > GIN100{warning.Error}");
                         }

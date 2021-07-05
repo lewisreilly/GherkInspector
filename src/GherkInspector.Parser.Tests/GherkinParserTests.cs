@@ -1,9 +1,8 @@
-﻿using NUnit.Framework;
-using System;
-using System.Linq;
-
-namespace GherkInspector.Parser.Tests
+﻿namespace GherkInspector.Parser.Tests
 {
+    using System.Linq;
+    using NUnit.Framework;
+
     [TestFixture]
     public class GherkinParserTests
     {

@@ -1,10 +1,9 @@
-﻿using NUnit.Framework;
-using System;
-using System.IO;
-using System.Reflection;
-
-namespace GherkInspector.Parser.IntegrationTests
+﻿namespace GherkInspector.Parser.IntegrationTests
 {
+    using System.IO;
+    using System.Reflection;
+    using NUnit.Framework;
+
     [TestFixture]
     public class FeatureFileReaderTests
     {

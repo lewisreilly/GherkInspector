@@ -1,10 +1,7 @@
-﻿using GherkInspector.Parser.Entity;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GherkInspector.Parser.CodeInspector
+﻿namespace GherkInspector.Parser.CodeInspector
 {
+    using GherkInspector.Parser.Entity;
+
     public class Warning
     {
         private string _id;

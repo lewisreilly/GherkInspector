@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
-
-namespace GherkInspector.Parser.Entity
+﻿namespace GherkInspector.Parser.Entity
 {
+    using System.Collections.Generic;
+
     public class GherkInspectorScenario
     {
         public string Name { get; private set; }
+
         public GherkInspectorLocation Location { get; private set; }
+
         public List<string> Tags { get; private set; }
+
         public List<GherkInspectorStep> Steps { get; private set; }
 
         public GherkInspectorScenario()
