@@ -7,9 +7,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GherkInspector.Parser", "Gh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GherkInspector.Parser.UnitTests", "GherkInspector.Parser.Tests\GherkInspector.Parser.UnitTests.csproj", "{2A6E3193-DC2D-4ED2-8F74-8EE47FD961B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GherkInspector.Parser.IntegrationTests", "GherkInspector.Parser.IntegrationTests\GherkInspector.Parser.IntegrationTests.csproj", "{BD3F8860-5231-434D-A1C2-6393EF0C78A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GherkInspector.Parser.IntegrationTests", "GherkInspector.Parser.IntegrationTests\GherkInspector.Parser.IntegrationTests.csproj", "{BD3F8860-5231-434D-A1C2-6393EF0C78A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GherkInspector.CLI", "GherkInspector.CLI\GherkInspector.CLI.csproj", "{FDA67AE5-88C2-4AB1-8CC0-704050126AD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GherkInspector.CLI", "GherkInspector.CLI\GherkInspector.CLI.csproj", "{FDA67AE5-88C2-4AB1-8CC0-704050126AD4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8AF79B53-B43A-4AB5-A010-E429AEA321B5}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
