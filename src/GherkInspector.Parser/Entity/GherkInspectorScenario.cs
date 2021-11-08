@@ -12,6 +12,8 @@
 
         public List<GherkInspectorStep> Steps { get; private set; }
 
+        public List<GherkInspectorExample> Examples { get; private set; }
+
         public GherkInspectorScenario()
             : this(string.Empty, new GherkInspectorLocation(0, 0))
         {
@@ -24,6 +26,7 @@
 
             Tags = new List<string>();
             Steps = new List<GherkInspectorStep>();
+            Examples = new List<GherkInspectorExample>();
         }
     }
 }

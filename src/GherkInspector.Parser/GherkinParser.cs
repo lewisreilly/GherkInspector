@@ -1,6 +1,7 @@
 ﻿namespace GherkInspector.Parser
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using Gherkin.Ast;
     using GherkInspector.Parser.Entity;
@@ -35,21 +36,42 @@
 
             foreach (var featureChild in gherkinDocument.Feature.Children)
             {
-                var xScenario = new GherkInspectorScenario();
+                var gherkInspectorScenario = new GherkInspectorScenario();
 
                 if (featureChild is Scenario scenario)
                 {
-                    var xLocation = new GherkInspectorLocation(scenario.Location.Line, scenario.Location.Column);
-                    xScenario = new GherkInspectorScenario(scenario.Name, xLocation);
+                    gherkInspectorScenario = new GherkInspectorScenario(scenario.Name, ConvertLocation(scenario.Location));
 
                     foreach (var tag in feature.Tags)
                     {
-                        xScenario.Tags.Add(tag);
+                        gherkInspectorScenario.Tags.Add(tag);
                     }
 
                     foreach (var tag in scenario.Tags)
                     {
-                        xScenario.Tags.Add(tag.Name);
+                        gherkInspectorScenario.Tags.Add(tag.Name);
+                    }
+
+                    foreach (var example in scenario.Examples)
+                    {
+                        var tableHeaderCells = new List<GherkInspectorTableCell>();
+                        foreach (var cell in example.TableHeader.Cells)
+                        {
+                            tableHeaderCells.Add(
+                                new GherkInspectorTableCell(
+                                    ConvertLocation(cell.Location),
+                                    cell.Value));
+                        }
+
+                        var headerRow = new GherkInspectorTableRow(
+                            ConvertLocation(example.TableHeader.Location),
+                            tableHeaderCells);
+
+                        var x = new GherkInspectorExample(
+                            ConvertLocation(example.Location),
+                            headerRow);
+
+                        gherkInspectorScenario.Examples.Add(x);
                     }
                 }
 
@@ -57,17 +79,17 @@
                 {
                     foreach (var step in stepsContainer.Steps)
                     {
-                        xScenario.Steps.Add(
+                        gherkInspectorScenario.Steps.Add(
                             new GherkInspectorStep(
                                 step.Keyword,
                                 step.Text,
-                                new GherkInspectorLocation(
-                                    step.Location.Line,
-                                    step.Location.Column)));
+                                ConvertLocation(step.Location)
+                                )
+                            );
                     }
                 }
 
-                feature.Scenarios.Add(xScenario);
+                feature.Scenarios.Add(gherkInspectorScenario);
             }
 
             return feature;
@@ -79,6 +101,11 @@
             {
                 feature.Description = gherkinDocument.Feature.Description;
             }
+        }
+
+        private GherkInspectorLocation ConvertLocation(Location location)
+        {
+            return new GherkInspectorLocation(location.Line, location.Column);
         }
     }
 }

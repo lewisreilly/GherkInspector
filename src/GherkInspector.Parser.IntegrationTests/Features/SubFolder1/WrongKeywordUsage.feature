@@ -2,26 +2,28 @@
 
 A short summary of the feature
 
-Scenario: Multiple step keywords
+Scenario: Multiple Given steps
     Given a step
     When another step
     Given another given step
     Then the last step
 
- Scenario: Scenario indented
+Scenario: Multiple When steps
     Given a step
-    And another step
-    When action
-    Then assertion
+    When another step
+    When another given step
+    Then the last step
 
-Scenario: A step indented by 5 spaces
+Scenario: Multiple Then steps
     Given a step
-     And another step
-    When action
-    Then assertion
+    When another step
+    Then another given step
+    Then the last step
 
-Scenario: A step indented with a tab
-	Given a step
-    And another step
-    When action
-    Then assertion
+Scenario Outline: Scenario outline with a single example should be a Scenario
+    Given a step
+    When another step
+    Then the last step
+    Examples: 
+        | Value1 | Value2 |
+        | 1      | "a"    |

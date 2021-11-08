@@ -123,7 +123,7 @@ Scenario: Example
         }
 
         [Test]
-        public void Scenario_AnyIndentation_Warning()
+        public void Scenario_IsIndented_Warning()
         {
             // Arrange
             var inspector = new Inspector();
@@ -157,6 +157,33 @@ Feature: Example
 
 Scenario: Example
 {indentation}Given a step
+");
+
+            // Act
+            inspector.InspectScenario(result.Scenarios.First());
+
+            // Assert
+            Assert.That(inspector.Warnings.Count, Is.EqualTo(1));
+            Assert.That(inspector.Warnings.First().Error, Does.StartWith("4:"));
+            Assert.That(inspector.Warnings.First().Error, Does.Contain("Steps should be indented with 4 spaces"));
+        }
+
+        [Test]
+        public void ScenarioOutline_WithOneExample_ShouldBeAScenario()
+        {
+            // Arrange
+            var inspector = new Inspector();
+
+            var result = _gherkinParser.ParseFeatureText($@"
+Feature: Example
+
+Scenario Outline: Example
+Given a step
+When a step
+Then a step
+Examples:
+| Value1 |
+| 1      |
 ");
 
             // Act

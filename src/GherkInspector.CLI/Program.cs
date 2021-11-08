@@ -62,7 +62,7 @@
                     {
                         foreach (var warning in inspector.Warnings)
                         {
-                            Console.WriteLine($"            > GIN100{warning.Error}");
+                            Console.WriteLine($"            > GKN100{warning.Error}");
                         }
                     }
                 }
