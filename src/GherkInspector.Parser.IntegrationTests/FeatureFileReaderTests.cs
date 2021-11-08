@@ -17,7 +17,7 @@
             var results = featureFileReader.Read($"{rootDirectory}/Features");
 
             Assert.That(results.TotalFeatureCount, Is.EqualTo(3));
-            Assert.That(results.TotalScenarioCount, Is.EqualTo(10));
+            Assert.That(results.TotalScenarioCount, Is.EqualTo(9));
         }
     }
 }
