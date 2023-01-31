@@ -27,9 +27,9 @@
             var featureFileFinder = new FeatureFileFinder();
             var featureFiles = featureFileFinder.Find(args[0]);
 
-            foreach (var file in featureFiles)
+            foreach (var feature in featureFiles)
             {
-                Console.WriteLine($"    > {file}");
+                Console.WriteLine($"    > {feature.Name}.feature");
             }
 
             Console.ReadKey();
