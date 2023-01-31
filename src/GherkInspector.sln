@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GherkInspector.Console", "GherkInspector.Console\GherkInspector.Console.csproj", "{E27AE187-94D4-451E-9909-2092FF03E148}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Features", "Features", "{D510AB70-A2D3-4C7D-9869-06E0908E19E0}"
+	ProjectSection(SolutionItems) = preProject
+		Features\Simple.feature = Features\Simple.feature
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{9A6C6C1F-1979-4AB2-97B1-96FB0BBB7AD6}"
+	ProjectSection(SolutionItems) = preProject
+		Run.cmd = Run.cmd
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GherkInspector.Parser", "GherkInspector.Parser\GherkInspector.Parser.csproj", "{E505DDD5-4E9E-40A2-BD55-50F39C36821E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E27AE187-94D4-451E-9909-2092FF03E148}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E27AE187-94D4-451E-9909-2092FF03E148}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E27AE187-94D4-451E-9909-2092FF03E148}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E27AE187-94D4-451E-9909-2092FF03E148}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E505DDD5-4E9E-40A2-BD55-50F39C36821E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E505DDD5-4E9E-40A2-BD55-50F39C36821E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E505DDD5-4E9E-40A2-BD55-50F39C36821E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E505DDD5-4E9E-40A2-BD55-50F39C36821E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14D471C1-B73B-4D35-9596-7E55A4BF3302}
+	EndGlobalSection
+EndGlobal
